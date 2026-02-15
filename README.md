@@ -1,0 +1,1 @@
+This is a prediction model created based on IRIS dataset. we have used logisttcis regression , Label Encoding for this model, and grid search CV is used for hyper parameter tunnning.

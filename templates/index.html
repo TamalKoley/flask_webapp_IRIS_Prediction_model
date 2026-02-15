@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRIS Prediction Model</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        .result {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            display: none;
+        }
+        .result.show {
+            display: block;
+        }
+        .result h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .result p {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 IRIS Species Prediction</h1>
+        <form method="POST" action="{{ url_for('predict') }}">
+            <div class="form-group">
+                <label for="sepal_length">Sepal Length (cm)</label>
+                <input type="number" id="sepal_length" name="sepal_length" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="sepal_width">Sepal Width (cm)</label>
+                <input type="number" id="sepal_width" name="sepal_width" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="petal_length">Petal Length (cm)</label>
+                <input type="number" id="petal_length" name="petal_length" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="petal_width">Petal Width (cm)</label>
+                <input type="number" id="petal_width" name="petal_width" step="0.1" required>
+            </div>
+            <button type="submit">Predict Species</button>
+        </form>
+
+        {% if result %}
+        <div class="result show">
+            <h2>Prediction Result</h2>
+            <p>Predicted Species: <strong>{{ result }}</strong></p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
